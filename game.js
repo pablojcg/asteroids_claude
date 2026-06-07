@@ -9,6 +9,18 @@ const H = 600;
 const keys = {};
 const justPressed = {};
 
+window.addEventListener('keydown', (e) => {
+  if (!keys[e.code]) justPressed[e.code] = true;
+  keys[e.code] = true;
+  // Evita que las flechas y el espacio hagan scroll de la página
+  if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Space'].includes(e.code)) {
+    e.preventDefault();
+  }
+});
+
+window.addEventListener('keyup', (e) => {
+  keys[e.code] = false;
+});
 
 function pressed(code) {
   const val = justPressed[code];
